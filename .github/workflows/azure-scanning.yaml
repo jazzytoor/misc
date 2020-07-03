@@ -12,8 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - run: docker build -f ./container-scanning/azure/Dockerfile -t azure-scanning-poc:latest .
+    - name: Build Simple Docker Image
+      run: |
+        docker build -f ./container-scanning/Dockerfile -t container-scanning-poc:latest .
       
     - uses: Azure/container-scan@v0
       with:
-        image-name: azure-scanning-poc:latest
+        image-name: container-scanning-poc:latest
