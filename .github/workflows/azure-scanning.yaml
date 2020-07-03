@@ -14,8 +14,8 @@ jobs:
 
     - name: Build Simple Docker Image
       run: |
-        docker build -f ./container-scanning/Dockerfile -t container-scanning-poc:latest .
+        docker build -f ./container-scanning/Dockerfile -t container-scanning-poc:${{ github.sha }} .
       
     - uses: Azure/container-scan@v0
       with:
-        image-name: container-scanning-poc:latest
+        image-name: container-scanning-poc:${{ github.sha }}
