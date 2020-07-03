@@ -20,12 +20,12 @@ jobs:
 
       - name: Build Simple Docker Image
         run: |
-          docker build -f ./container-scanning/Dockerfile -t container-scanning-poc:latest .
+          docker build -f ./container-scanning/Dockerfile -t container-scanning-poc:${{ github.sha }} .
 
       - name: Run Vulnerability Scanner Against Image
         uses: aquasecurity/trivy-action@0.0.7
         with:
-          image-ref: 'container-scanning-poc:latest'
+          image-ref: 'container-scanning-poc:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
