@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - run: docker build -f ./container-scanning/azure/Dockerfile -t azure-scanning-poc:latest
+    - run: docker build -f ./container-scanning/azure/Dockerfile -t azure-scanning-poc:latest .
       
     - uses: Azure/container-scan@v0
       with:
