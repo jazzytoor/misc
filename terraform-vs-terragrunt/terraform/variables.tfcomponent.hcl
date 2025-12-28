@@ -7,3 +7,7 @@ variable "service" {
   type = string
   default = "misc-terraform"
 }
+
+variable "environment" {
+  type = string
+}
