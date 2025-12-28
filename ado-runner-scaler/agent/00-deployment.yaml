@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ado-deployment
+  labels:
+    app: adodj
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adodj
+  template:
+    metadata:
+      labels:
+        app: adodj
+    spec:
+      containers:
+      - name: adodj
+        image: ado:latest
+        imagePullPolicy: Never
+        env:
+          - name: AZP_URL
+            value: <AZURE_DEVOPS_URL>
+          - name: AZP_POOL
+            value: <AGENT_POOL_NAME>
+          - name: AZP_TOKEN
+            value: <PAT_TOKEN>
+          - name: AZP_KIND
+            value: deployment
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-volume
+      volumes:
+      - name: docker-volume
+        hostPath:
+          path: /var/run/docker.sock
