@@ -14,3 +14,7 @@
 ## Future Scope
 - Deploy solution to AWS EKS and provide scaled agents.
 - Use of Karpenter to deploy backend compute resources (ec2).
+
+## References
+- [Azure Pipelines Keda](https://keda.sh/docs/2.18/scalers/azure-pipelines/)
+- [Azure DevOps Agent](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops#linux)
