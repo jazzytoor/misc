@@ -1,4 +1,4 @@
-<h1 align="center">AWS EKS Capabilities</h1>
+<h1 align="center">EKS Capability for Argo CD</h1>
 
 ## Guide
 
