@@ -8,6 +8,7 @@ Within this repository it will contain proof of concepts
 
 - ✨ Container Scanning [Azure](/container-scanning/.github/workflows/azure-scanning.yaml) & [Trivy](/container-scanning/.github/workflows/trivy-scanning.yaml).
 - ✨ EKS Capability for Argo CD [readme](/aws-eks-capabilities/README.md).
+- ✨ Terraform vs Terragrunt [readme](/terraform-vs-terragrunt/README.md).
 
 ## Author
 
