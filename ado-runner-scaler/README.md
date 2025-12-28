@@ -7,6 +7,7 @@
 - `--once` is required in the shell script so that the agent will terminate and cleanup itself when the job is completed.
 
 ## Usage
+- Generate PAT token from Azure DevOps providing `Agent Pools: Read & manage` scope.
 - To build the Dockerfile you can run the following command: `docker build -t ado:latest .`
 - `cd ado-runner-scaler`.
 - Deploy the Kubernetes manifest by `kubectl apply -f agent`.
