@@ -34,7 +34,7 @@ spec:
   failedJobsHistoryLimit: 0
   maxReplicaCount: 10
   scalingStrategy:
-    strategy: "default"               
+    strategy: "default"
   triggers:
   - type: azure-pipelines
     metadata:

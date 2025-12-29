@@ -10,7 +10,7 @@
 2. `cd terraform` > `terraform init` > `terraform plan` > `terraform apply`.
 3. Terraform outputs will display `server_url` where you can now access the Argo CD portal.
 4. Login with the username and password from IAM Identity Centre.
-5. In order to deploy applications to Argocd we need to register the EKS cluster by the following command 
+5. In order to deploy applications to Argocd we need to register the EKS cluster by the following command
     ```bash
     # Get the cluster ARN
     CLUSTER_ARN=$(aws eks describe-cluster \
@@ -64,7 +64,7 @@
     Using `https://kubernetes.default.svc` won't work because the EKS capability does not automatically add the local cluster (kubernetes.default.svc) as a deployment target to deploy to the same cluster where the capability is created, explicitly register that cluster using its ARN.
 7. `aws_eks_access_policy_association.argocd` Terraform resource has been created because the `AmazonEKSCapabilityArgoCDRole` role requires EKS cluster access permissions in order for us to deploy applications to Argocd. This is important otherwise you will be facing errors like the following
     ```
-    Failed to load live state: failed to get cluster info for "arn:aws:eks:xxx:xxx:cluster/dualstack": error synchronizing cache state : failed to sync cluster https://xxx.xxx.prod.ccs.eks.aws.dev: failed to load initial state of resource Job.batch: failed to list resources: jobs.batch is forbidden: User "arn:aws:sts::xxx:assumed-role/AmazonEKSCapabilityArgoCDRole/aws-go-sdk-xxx" 
+    Failed to load live state: failed to get cluster info for "arn:aws:eks:xxx:xxx:cluster/dualstack": error synchronizing cache state : failed to sync cluster https://xxx.xxx.prod.ccs.eks.aws.dev: failed to load initial state of resource Job.batch: failed to list resources: jobs.batch is forbidden: User "arn:aws:sts::xxx:assumed-role/AmazonEKSCapabilityArgoCDRole/aws-go-sdk-xxx"
     ```
 
     With the permissions as

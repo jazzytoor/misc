@@ -5,7 +5,7 @@
 - This is a comparison between Terraform Stacks vs Terragrunt.
 
 - Problem Statement
-    
+
     When deploying infrastructure across multiple Terraform modules (for example **VPC**, **subnets**, and **NAT layers**), plain Terraform makes it difficult to:
 
     - Change module boundaries without refactoring state
