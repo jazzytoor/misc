@@ -1,0 +1,10 @@
+- name: Deployment
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Hello World
+    debug:
+      msg: "Hello World"
+  - name: Show playbook directory
+    debug:
+      msg: "{{ playbook_dir }}"
