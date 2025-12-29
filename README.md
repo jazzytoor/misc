@@ -19,6 +19,7 @@ Within this repository it will contain proof of concepts
 
 **Security**
 - ✨ Container Scanning [readme](/security/container-scanning/README.md).
+- ✨ Conftest [readme](/security/conftest/README.md).
 
 ## Author
 
