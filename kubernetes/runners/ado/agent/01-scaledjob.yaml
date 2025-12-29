@@ -1,0 +1,43 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledJob
+metadata:
+  name: ado-scaledjob
+  labels:
+    name: adosj
+spec:
+  jobTargetRef:
+    template:
+      metadata:
+        labels:
+          name: adosj
+      spec:
+        containers:
+        - name: adosj
+          image: ado:latest
+          imagePullPolicy: Never
+          env:
+          - name: AZP_URL
+            value: <AZURE_DEVOPS_URL>
+          - name: AZP_POOL
+            value: <AGENT_POOL_NAME>
+          - name: AZP_TOKEN
+            value: <PAT_TOKEN>
+          volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: dockervolume
+        volumes:
+        - name: dockervolume
+          hostPath:
+            path: /var/run/docker.sock
+  pollingInterval: 10
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  maxReplicaCount: 10
+  scalingStrategy:
+    strategy: "default"
+  triggers:
+  - type: azure-pipelines
+    metadata:
+      poolName: <AGENT_POOL_NAME>
+      organizationURLFromEnv: "AZP_URL"
+      personalAccessTokenFromEnv: "AZP_TOKEN"

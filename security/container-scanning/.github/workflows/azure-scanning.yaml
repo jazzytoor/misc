@@ -1,0 +1,21 @@
+name: azure-container-scanning
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-secure-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Build Simple Docker Image
+      run: |
+        docker build -f ./container-scanning/Dockerfile -t container-scanning-poc:${{ github.sha }} .
+
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: container-scanning-poc:${{ github.sha }}
