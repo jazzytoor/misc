@@ -5,7 +5,6 @@
   - name: Hello World
     debug:
       msg: "Hello World"
-  - name: Find out playbook's path
-    shell: pwd
-    register: playbook_path_output
-  - debug: var=playbook_path_output.stdout
+  - name: Show playbook directory
+    debug:
+      msg: "{{ playbook_dir }}"

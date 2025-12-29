@@ -18,6 +18,10 @@ module "app" {
   runtime        = "python3.14"
   create_package = false
 
+  timeout = 900
+
+  environment_variables = {}
+
   image_uri     = module.image_build.image_uri
   package_type  = "Image"
   architectures = ["x86_64"]

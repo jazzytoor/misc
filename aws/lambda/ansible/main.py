@@ -1,5 +1,4 @@
 import os
 
 def lambda_handler(event, context):
-    os.system("locale -a")
-    os.system("ansible-playbook main.yml")
+    os.system("LC_ALL='C.UTF-8' ansible-playbook main.yml")
