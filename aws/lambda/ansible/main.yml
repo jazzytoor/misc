@@ -2,9 +2,9 @@
   hosts: localhost
   gather_facts: false
   tasks:
-  - name: Print resource_index
+  - name: Hello World
     debug:
-      msg: "hi"
+      msg: "Hello World"
   - name: Find out playbook's path
     shell: pwd
     register: playbook_path_output
