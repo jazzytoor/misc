@@ -11,7 +11,7 @@ Within this repository it will contain proof of concepts
 - ✨ AWS Lambda Ansible [readme](/aws/lambda/ansible/README.md).
 
 **IAC**
-- ✨ Terraform vs Terragrunt [readme](/iac/terraform-vs-terragrunt/README.md).
+- ✨ Terraform Stacks vs Terragrunt [readme](/iac/terraform-vs-terragrunt/README.md).
 
 **Kubernetes**
 - ✨ Azure Pipelines Ado Agent Keda Scaler [readme](/kubernetes/runners/ado/README.md).
