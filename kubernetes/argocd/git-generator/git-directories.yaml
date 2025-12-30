@@ -9,21 +9,22 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/jazzytoor/misc.git
-      revision: HEAD
+      revision: feat/argocd-git-generator
       directories:
       - path: kubernetes/argocd/git-generator/apps/*
   template:
     metadata:
       name: '{{.path.basename}}'
     spec:
-      project: "demo"
+      project: default
       source:
         repoURL: https://github.com/jazzytoor/misc.git
-        targetRevision: HEAD
+        targetRevision: feat/argocd-git-generator
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basename}}'
       syncPolicy:
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true
+        automated: {}
