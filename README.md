@@ -10,6 +10,9 @@ Within this repository it will contain proof of concepts
 - ✨ EKS Capability for Argo CD [readme](/aws/eks/capabilities/README.md).
 - ✨ AWS Lambda Ansible [readme](/aws/lambda/ansible/README.md).
 
+**CI/CD**
+- ✨ GitHub AWS ECR [readme](/cicd/github/ecr/README.md).
+
 **IAC**
 - ✨ Terraform Stacks vs Terragrunt [readme](/iac/terraform-vs-terragrunt/README.md).
 
