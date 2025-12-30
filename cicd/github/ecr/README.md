@@ -21,3 +21,5 @@
       - AWS_ACCESS_KEY_ID (iam_user_access_key_id)
       - AWS_SECRET_ACCESS_KEY (iam_user_access_key_secret)
       - AWS_REGION
+
+- Now using GitHub actions when you run the action it will be able to build and push the image to AWS ECR.

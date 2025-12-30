@@ -1,4 +1,4 @@
-module "iam_user2" {
+module "iam_user" {
   source = "terraform-aws-modules/iam/aws//modules/iam-user"
 
   name = "ecr"
