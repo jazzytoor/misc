@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/jazzytoor/misc.git
+      revision: HEAD
+      directories:
+      - path: kubernetes/argocd/git-generator/apps/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: "demo"
+      source:
+        repoURL: https://github.com/jazzytoor/misc.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
