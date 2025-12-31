@@ -8,7 +8,7 @@ generate "provider" {
   if_exists = "overwrite_terragrunt"
   contents = <<EOF
 provider "aws" {
-  region = "eu-west-2"
+  region = "${local.variables.region}"
 }
 EOF
 }

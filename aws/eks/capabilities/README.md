@@ -1,16 +1,22 @@
 <h1 align="center">EKS Capability for Argo CD</h1>
 
-## Guide
+## Overview
 
 - AWS have announced [EKS capabilities](https://aws.amazon.com/blogs/aws/announcing-amazon-eks-capabilities-for-workload-orchestration-and-cloud-resource-management/) which include open Kubernetes solutions such as Argo CD.
 - Infrastructure to deploy VPC, EKS, IAM Identity Centre User & Group and EKS capability.
 
 ## Usage
 1. Ensure AWS CLI is configured.
-2. `cd terraform` > `terraform init` > `terraform plan` > `terraform apply`.
-3. Terraform outputs will display `server_url` where you can now access the Argo CD portal.
-4. Login with the username and password from IAM Identity Centre.
-5. In order to deploy applications to Argocd we need to register the EKS cluster by the following command
+2. `cd aws/eks/capabilities/terraform`
+3. Create `variables.auto.tfvars` file and input the following variables
+    ```bash
+    service = "enter your service name"
+    region = "enter aws region"
+    ```
+4. `terraform init` > `terraform plan` > `terraform apply -auto-approve`
+5. Terraform outputs will display `server_url` where you can now access the Argo CD portal.
+6. Login with the username and password from IAM Identity Centre.
+7. In order to deploy applications to Argo CD we need to register the EKS cluster by the following command
     ```bash
     # Get the cluster ARN
     CLUSTER_ARN=$(aws eks describe-cluster \
@@ -18,7 +24,7 @@
     --query 'cluster.arn' \
     --output text)
 
-    # In order to authenticate with Argocd the standard argocd login is not supported
+    # In order to authenticate with Argo CD the standard argocd login is not supported
     # Get the Argo CD server URL from the EKS console (under your clusters Capabilities tab), or using the AWS CLI:
     export ARGOCD_SERVER=$(aws eks describe-capability \
     --cluster-name my-cluster \
@@ -39,7 +45,7 @@
     --name in-cluster \
     --project default
     ```
-6. Within the Argocd manifest we can now include the following
+8. Within the Argo CD manifest we can now include the following
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
@@ -62,7 +68,7 @@
     ```
 
     Using `https://kubernetes.default.svc` won't work because the EKS capability does not automatically add the local cluster (kubernetes.default.svc) as a deployment target to deploy to the same cluster where the capability is created, explicitly register that cluster using its ARN.
-7. `aws_eks_access_policy_association.argocd` Terraform resource has been created because the `AmazonEKSCapabilityArgoCDRole` role requires EKS cluster access permissions in order for us to deploy applications to Argocd. This is important otherwise you will be facing errors like the following
+9. `aws_eks_access_policy_association.argocd` Terraform resource has been created because the `AmazonEKSCapabilityArgoCDRole` role requires EKS cluster access permissions in order for us to deploy applications to Argo CD. This is important otherwise you will be facing errors like the following
     ```
     Failed to load live state: failed to get cluster info for "arn:aws:eks:xxx:xxx:cluster/dualstack": error synchronizing cache state : failed to sync cluster https://xxx.xxx.prod.ccs.eks.aws.dev: failed to load initial state of resource Job.batch: failed to list resources: jobs.batch is forbidden: User "arn:aws:sts::xxx:assumed-role/AmazonEKSCapabilityArgoCDRole/aws-go-sdk-xxx"
     ```
@@ -76,9 +82,7 @@
     ```
 
     For now `AmazonEKSClusterAdminPolicy` has been given but this can be locked down further to follow least privilege.
-
-
-8. Be aware of the pricing for such feature, AWS charge the following:
+10. Be aware of the pricing for such feature, AWS charge the following:
    - Argo CD base charge
    - Argo CD usage charge
    - Argo CD Application hour: Each hour an Application is managed by Argo CD Capability. Each Application is counted per target cluster deployment - if you deploy one Application to 5 different clusters, this counts as 5 Applications. When using ApplicationSets with generators, each generated Application instance counts as one Application.

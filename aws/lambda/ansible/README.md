@@ -1,6 +1,6 @@
 <h1 align="center">AWS Lambda Ansible</h1>
 
-## Guide
+## Overview
 
 This was a **proof-of-concept test** to see if Ansible could run inside AWS Lambda.
 

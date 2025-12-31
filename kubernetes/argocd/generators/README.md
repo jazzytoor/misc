@@ -5,15 +5,16 @@
 Problem statement: how do we automatically deploy applications to Argocd without any manual processes?
 
 ## Usage
-- Ensure Docker Desktop is running with Kubernetes cluster enabled and Argocd is running on the cluster.
-- `cd kubernetes/argocd/git-generator`.
-- [syntax](./syntax.yaml) yaml file has been created to help define the sytax used.
+1. Ensure Docker Desktop is running with Kubernetes cluster enabled and Argocd is running on the cluster.
+2. `cd kubernetes/argocd/git-generator`.
 
 ### Git
-- `kubectl apply -f git.yaml`.
+3. `kubectl apply -f git.yaml`.
 
 ### Pullrequests
-- `kubectl apply -f pullrequest.yaml`.
+3. `kubectl apply -f pullrequest.yaml`.
+
+- [syntax](./syntax.yaml) yaml file has been created to help define the syntax used.
 
 **Future Scope**
 - Can we update the version through GitHub Actions to the new image tag that been push to AWS ECR.

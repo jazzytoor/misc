@@ -5,3 +5,7 @@ variable "service" {
 variable "host" {
   type = string
 }
+
+variable "region" {
+  type = string
+}
