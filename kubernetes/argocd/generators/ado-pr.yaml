@@ -1,18 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: microservices
+  name: pullrequests
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      requeueAfterSeconds: 30
-      repoURL: https://github.com/jazzytoor/misc.git
-      revision: feat/argocd-git-generator
-      directories:
-      - path: kubernetes/argocd/generators/apps/*
+  - pullRequest:
+      azuredevops:
+        organization: jazztoor
+        project: myproject
+        repo: myrepository
+        api: https://dev.azure.com/
+        tokenRef:
+          secretName: azure-devops-token
+          key: token
+        labels:
+        - preview
+      requeueAfterSeconds: 90
   template:
     metadata:
       name: '{{.path.basename}}'
@@ -20,8 +26,8 @@ spec:
       project: default
       source:
         repoURL: https://github.com/jazzytoor/misc.git
-        targetRevision: feat/argocd-git-generator
-        path: '{{.path.path}}'
+        targetRevision: '{{.head_sha}}'
+        path: kubernetes/argocd/generators
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basename}}'

@@ -9,24 +9,22 @@ spec:
   generators:
   - pullRequest:
       github:
-        owner: '{{.author}}'
+        owner: jazzytoor
         repo: misc
         labels:
           - preview
       requeueAfterSeconds: 90
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: 'hello-world-{{.branch}}-{{.number}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/jazzytoor/misc.git
         targetRevision: '{{.head_sha}}'
-        path: kubernetes/argocd/generators
+        path: kubernetes/argocd/generators/apps/hello-world
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        namespace: default
       syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
         automated: {}
