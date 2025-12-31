@@ -4,11 +4,13 @@ on:
   pull_request:
     branches:
       - main
+      - feat/github-actions-aws-oidc
     paths:
       - cicd/github/ecr/**
   push:
     branches:
       - main
+      - feat/github-actions-aws-oidc
     paths:
       - cicd/github/ecr/**
   workflow_dispatch:
