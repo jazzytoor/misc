@@ -1,6 +1,6 @@
 <h1 align="center">Terraform Stacks vs Terragrunt</h1>
 
-## Guide
+## Overview
 
 - This is a comparison between Terraform Stacks vs Terragrunt.
 
@@ -15,13 +15,10 @@
 
 ## Usage
 **Terragrunt**
-- `cd terragrunt/prod`
-- `terragrunt stack run init`
-- `terragrunt stack run plan`
-- `terragrunt stack run apply --non-interactive`
+1. `cd iac/terraform-vs-terragrunt/terragrunt/prod` > `terragrunt stack run init` > `terragrunt stack run plan` > `terragrunt stack run apply --non-interactive`
 
 **Terraform**
-- Terraform stacks are only available through HCP Terraform.
+1. Terraform stacks are only available through HCP Terraform.
 
 ## Differences
 

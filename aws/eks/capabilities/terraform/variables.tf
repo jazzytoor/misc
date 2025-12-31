@@ -1,4 +1,7 @@
 variable "service" {
-  type    = string
-  default = "aws-eks-capabilities-argocd"
+  type = string
+}
+
+variable "region" {
+  type = string
 }
