@@ -8,30 +8,23 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - pullRequest:
-      azuredevops:
-        organization: jazztoor
-        project: myproject
-        repo: myrepository
-        api: https://dev.azure.com/
-        tokenRef:
-          secretName: azure-devops-token
-          key: token
+      github:
+        owner: jazzytoor
+        repo: misc
         labels:
-        - preview
-      requeueAfterSeconds: 90
+          - enhancement
+      requeueAfterSeconds: 10
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: 'hello-world-{{.head_sha}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/jazzytoor/misc.git
         targetRevision: '{{.head_sha}}'
-        path: kubernetes/argocd/generators
+        path: kubernetes/argocd/generators/apps/hello-world
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        namespace: default
       syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
         automated: {}

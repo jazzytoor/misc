@@ -4,15 +4,11 @@ metadata:
   name: microservices
   namespace: argocd
 spec:
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
-  generators:
+  goTemplate: true # Enable Go Text template
+  goTemplateOptions: ["missingkey=error"] # If undefined values are looked up by template then an error is reported instead of being ignored silently
+  generators: # Any 9 generators can be defined here (https://argo-cd.readthedocs.io/en/latest/operator-manual/applicationset/Generators/)
   - git:
-      requeueAfterSeconds: 30
-      repoURL: https://github.com/jazzytoor/misc.git
-      revision: HEAD
-      directories:
-      - path: kubernetes/argocd/generators/apps/*
+  - pullRequest:
   template:
     metadata:
       name: '{{.path.basename}}'
@@ -29,9 +25,9 @@ spec:
         syncOptions:
           - CreateNamespace=true
         automated: {}
-        managedNamespaceMetadata:
+        managedNamespaceMetadata: # Adds labels and annotations to the namespace (https://argo-cd.readthedocs.io/en/latest/user-guide/sync-options/#namespace-metadata)
           labels:
             argocd.argoproj.io/instance: '{{.path.basename}}'
-          annotations:
+          annotations: # Allows for resource tracking, if namespace is created via Argo it can then delete it
             argocd.argoproj.io/tracking-id: >-
               {{.path.basename}}:app/Namespace:{{.path.basename}}/{{.path.basename}}
