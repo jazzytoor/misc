@@ -20,6 +20,10 @@ jobs:
     name: oidc
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v6
