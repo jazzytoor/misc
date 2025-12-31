@@ -1,17 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cluster-addons
+  name: microservices
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
+      requeueAfterSeconds: 30
       repoURL: https://github.com/jazzytoor/misc.git
       revision: feat/argocd-git-generator
       directories:
-      - path: kubernetes/argocd/git-generator/apps/*
+      - path: kubernetes/argocd/generators/apps/*
   template:
     metadata:
       name: '{{.path.basename}}'

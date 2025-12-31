@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pullrequests
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - pullRequest:
+      github:
+        owner: '{{.author}}'
+        repo: misc
+        labels:
+          - preview
+      requeueAfterSeconds: 90
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/jazzytoor/misc.git
+        targetRevision: '{{.head_sha}}'
+        path: kubernetes/argocd/generators
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated: {}
