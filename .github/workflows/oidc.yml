@@ -6,13 +6,13 @@ on:
       - main
       - feat/github-actions-aws-oidc
     paths:
-      - iam/oidc/github/**
+      - aws/iam/oidc/github/**
   push:
     branches:
       - main
       - feat/github-actions-aws-oidc
     paths:
-      - iam/oidc/github/**
+      - aws/iam/oidc/github/**
   workflow_dispatch:
 
 jobs:
