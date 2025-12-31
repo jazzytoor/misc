@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pullrequests
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - pullRequest:
+      github:
+        owner: jazzytoor
+        repo: misc
+        labels:
+          - enhancement
+      requeueAfterSeconds: 10
+  template:
+    metadata:
+      name: 'hello-world-{{.head_sha}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/jazzytoor/misc.git
+        targetRevision: '{{.head_sha}}'
+        path: kubernetes/argocd/generators/apps/hello-world
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated: {}

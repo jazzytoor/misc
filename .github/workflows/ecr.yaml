@@ -2,6 +2,10 @@ name: ecr
 
 on:
   pull_request:
+    branches:
+      - main
+    paths:
+      - cicd/github/ecr/**
   push:
     branches:
       - main

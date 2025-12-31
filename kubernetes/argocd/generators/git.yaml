@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: microservices
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      requeueAfterSeconds: 30
+      repoURL: https://github.com/jazzytoor/misc.git
+      revision: HEAD
+      directories:
+      - path: kubernetes/argocd/generators/apps/*
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/jazzytoor/misc.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated: {}
+        managedNamespaceMetadata:
+          labels:
+            argocd.argoproj.io/instance: '{{.path.basename}}'
+          annotations:
+            argocd.argoproj.io/tracking-id: >-
+              {{.path.basename}}:app/Namespace:{{.path.basename}}/{{.path.basename}}
