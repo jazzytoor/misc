@@ -9,6 +9,7 @@ Within this repository it will contain proof of concepts
 **AWS**
 - ✨ EKS Capability for Argo CD [readme](/aws/eks/capabilities/README.md).
 - ✨ AWS Lambda Ansible [readme](/aws/lambda/ansible/README.md).
+- ✨ GitHub OpenID Connect AWS [readme](/aws/iam/oidc/github/README.md).
 
 **CI/CD**
 - ✨ GitHub AWS ECR [readme](/cicd/github/ecr/README.md).
