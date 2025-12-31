@@ -4,21 +4,23 @@ on:
   pull_request:
     branches:
       - main
-      - feat/github-actions-aws-oidc
     paths:
-      - iam/oidc/github/**
+      - aws/iam/oidc/github/**
   push:
     branches:
       - main
-      - feat/github-actions-aws-oidc
     paths:
-      - iam/oidc/github/**
+      - aws/iam/oidc/github/**
   workflow_dispatch:
 
 jobs:
   build:
     name: oidc
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout source
