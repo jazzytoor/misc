@@ -30,7 +30,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v5.1.1
         with:
           aws-region: eu-west-2
-          role-to-assume: arn:aws:iam::052275556902:role/github-actions
+          role-to-assume: arn:aws:iam::<AWS_ACCOUNT_ID>:role/github-actions
           role-session-name: aws
 
       - name: List Buckets

@@ -7,7 +7,7 @@ module "iam_oidc_provider" {
 
 module "s3_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "6.2.1"
+  version = "~> 6.0"
 
   name = "github-actions"
 
@@ -26,7 +26,8 @@ module "s3_policy" {
 }
 
 module "iam_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-role"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role"
+  version = "~> 6.0"
 
   name = "github-actions"
 
