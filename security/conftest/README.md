@@ -1,4 +1,4 @@
-<h1 align="center">Conftest</h1>
+# Conftest
 
 ## Overview
 

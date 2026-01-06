@@ -1,4 +1,4 @@
-<h1 align="center">GitHub AWS ECR</h1>
+# GitHub AWS ECR
 
 ## Overview
 

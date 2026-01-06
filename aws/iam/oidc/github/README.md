@@ -1,4 +1,4 @@
-<h1 align="center">GitHub OpenID Connect AWS</h1>
+# GitHub OpenID Connect AWS
 
 ## Overview
 

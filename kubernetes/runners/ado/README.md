@@ -1,4 +1,4 @@
-<h1 align="center">Azure Pipelines Ado Agent Keda Scaler</h1>
+# Azure Pipelines Ado Agent Keda Scaler
 
 ## Overview
 

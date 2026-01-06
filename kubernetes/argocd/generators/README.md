@@ -1,4 +1,4 @@
-<h1 align="center">Argo CD Generators</h1>
+# Argo CD Generators
 
 ## Overview
 
