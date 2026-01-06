@@ -1,4 +1,4 @@
-<h1 align="center">Terraform Stacks vs Terragrunt</h1>
+# Terraform Stacks vs Terragrunt
 
 ## Overview
 

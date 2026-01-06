@@ -1,4 +1,4 @@
-<h1 align="center">Container Scanning</h1>
+# Container Scanning
 
 ## Overview
 

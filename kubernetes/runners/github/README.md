@@ -1,4 +1,4 @@
-<h1 align="center">Github Runner Keda Scaler</h1>
+# Github Runner Keda Scaler
 
 ## Overview
 

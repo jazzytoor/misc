@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Misc 👋</h1>
+# Welcome to Misc
 
 ## ✨ Overview
 
