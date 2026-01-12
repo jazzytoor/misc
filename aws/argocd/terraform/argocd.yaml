@@ -24,4 +24,3 @@ server:
       alb.ingress.kubernetes.io/healthcheck-port: "8080"
       alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
       alb.ingress.kubernetes.io/success-codes: "200"
-
