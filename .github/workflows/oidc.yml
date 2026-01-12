@@ -29,9 +29,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5.1.1
         with:
-          aws-region: eu-west-2
-          role-to-assume: arn:aws:iam::<AWS_ACCOUNT_ID>:role/github-actions
-          role-session-name: aws
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions
+          role-session-name: github-actions
 
       - name: List Buckets
         run: |
