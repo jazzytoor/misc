@@ -9,7 +9,7 @@ spec:
   generators:
   - pullRequest:
       github:
-        owner: jazzytoor
+        owner: jazzzyjeff
         repo: misc
         labels:
           - enhancement
@@ -20,7 +20,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/jazzytoor/misc.git
+        repoURL: https://github.com/jazzzyjeff/misc.git
         targetRevision: '{{.head_sha}}'
         path: kubernetes/argocd/generators/apps/hello-world
       destination:

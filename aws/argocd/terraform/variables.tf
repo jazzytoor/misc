@@ -9,3 +9,8 @@ variable "region" {
 variable "domain" {
   type = string
 }
+
+variable "sso" {
+  type      = map(string)
+  sensitive = true
+}

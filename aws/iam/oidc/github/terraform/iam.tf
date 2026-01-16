@@ -48,7 +48,7 @@ module "iam_role" {
         {
           test     = "StringLike"
           variable = "token.actions.githubusercontent.com:sub"
-          values   = ["repo:jazzytoor/misc:ref:refs/heads/*"]
+          values   = ["repo:jazzzyjeff/misc:ref:refs/heads/*"]
         }
       ]
     }

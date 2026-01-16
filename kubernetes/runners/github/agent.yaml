@@ -39,7 +39,7 @@ spec:
           - name: DISABLE_RUNNER_UPDATE
             value: "true"
           - name: REPO_URL
-            value: "https://github.com/jazzytoor/misc"
+            value: "https://github.com/jazzzyjeff/misc"
           - name: RUNNER_SCOPE
             value: "repo"
           - name: LABELS
@@ -56,7 +56,7 @@ spec:
   triggers:
   - type: github-runner
     metadata:
-      owner: jazzytoor
+      owner: jazzzyjeff
       repos: misc
       labelsFromEnv: "my-label"
       runnerScopeFromEnv: "repo"

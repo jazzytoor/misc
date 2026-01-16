@@ -3,20 +3,74 @@ configs:
   params:
     server.insecure: true
 
+  cm:
+    url: https://${host_name}
+    admin.enabled: false
+    dex.config: |
+      logger:
+        level: debug
+        format: json
+      connectors:
+      - type: saml
+        id: aws
+        name: "AWS IAM Identity Center"
+        config:
+          ssoURL: ${sso_url}
+          caData: ${certificate}
+          entityIssuer: https://${host_name}/api/dex/callback
+          redirectURI: https://${host_name}/api/dex/callback
+          usernameAttr: email
+          emailAttr: email
+          groupsAttr: groups
+
+  rbac:
+    policy.default: role:readonly
+    policy.csv: |
+      p, role:readonly, applications, get, */*, allow
+      p, role:readonly, certificates, get, *, allow
+      p, role:readonly, clusters, get, *, allow
+      p, role:readonly, repositories, get, *, allow
+      p, role:readonly, projects, get, *, allow
+      p, role:readonly, accounts, get, *, allow
+      p, role:readonly, gpgkeys, get, *, allow
+      p, role:admin, applications, create, */*, allow
+      p, role:admin, applications, update, */*, allow
+      p, role:admin, applications, delete, */*, allow
+      p, role:admin, applications, sync, */*, allow
+      p, role:admin, applications, override, */*, allow
+      p, role:admin, applications, action/*, */*, allow
+      p, role:admin, certificates, create, *, allow
+      p, role:admin, certificates, update, *, allow
+      p, role:admin, certificates, delete, *, allow
+      p, role:admin, clusters, create, *, allow
+      p, role:admin, clusters, update, *, allow
+      p, role:admin, clusters, delete, *, allow
+      p, role:admin, repositories, create, *, allow
+      p, role:admin, repositories, update, *, allow
+      p, role:admin, repositories, delete, *, allow
+      p, role:admin, projects, create, *, allow
+      p, role:admin, projects, update, *, allow
+      p, role:admin, projects, delete, *, allow
+      p, role:admin, accounts, update, *, allow
+      p, role:admin, gpgkeys, create, *, allow
+      p, role:admin, gpgkeys, delete, *, allow
+      g, ${group_id}, role:admin
+    scopes: '[groups, email]'
+
 server:
   ingress:
     enabled: true
     ingressClassName: alb
-    hostname: "${hostname}"
+    hostname: ${host_name}
     annotations:
       kubernetes.io/ingress.class: alb
       alb.ingress.kubernetes.io/target-type: ip
       alb.ingress.kubernetes.io/scheme: internet-facing
-      alb.ingress.kubernetes.io/certificate-arn: "${certificate_arn}"
+      alb.ingress.kubernetes.io/certificate-arn: ${certificate_arn}
       alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
       alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
       alb.ingress.kubernetes.io/ssl-redirect: '443'
-      alb.ingress.kubernetes.io/subnets: "${subnets}"
+      alb.ingress.kubernetes.io/subnets: ${subnets}
 
       # healthcheck
       alb.ingress.kubernetes.io/backend-protocol: HTTP

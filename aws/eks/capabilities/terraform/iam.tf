@@ -8,6 +8,10 @@ resource "aws_identitystore_user" "default" {
     given_name  = var.service
     family_name = var.service
   }
+
+  emails {
+    value = var.email
+  }
 }
 
 resource "aws_identitystore_group" "default" {

@@ -9,7 +9,7 @@ spec:
   generators:
   - git:
       requeueAfterSeconds: 30
-      repoURL: https://github.com/jazzytoor/misc.git
+      repoURL: https://github.com/jazzzyjeff/misc.git
       revision: HEAD
       directories:
       - path: kubernetes/argocd/generators/apps/*
@@ -19,7 +19,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/jazzytoor/misc.git
+        repoURL: https://github.com/jazzzyjeff/misc.git
         targetRevision: HEAD
         path: '{{.path.path}}'
       destination:
