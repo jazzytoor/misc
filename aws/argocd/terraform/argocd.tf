@@ -8,9 +8,12 @@ resource "helm_release" "argocd" {
 
   values = [
     templatefile("${path.module}/argocd.yaml", {
-      hostname        = "${local.subdomain}.${var.domain}"
+      host_name       = "${local.subdomain}.${var.domain}"
       certificate_arn = module.acm.acm_certificate_arn
       subnets         = join(",", module.vpc.public_subnets)
+      sso_url         = var.sso["url"]
+      certificate     = var.sso["certificate"]
+      group_id        = var.sso["group_id"]
     })
   ]
 

@@ -5,3 +5,7 @@ variable "service" {
 variable "region" {
   type = string
 }
+
+variable "email" {
+  type = string
+}
