@@ -1,36 +1,18 @@
-data "aws_organizations_organization" "org" {}
+resource "aws_organizations_policy" "scps" {
+  for_each = local.scps
 
-data "aws_iam_policy_document" "deny_regions" {
-  statement {
-    sid    = "DenyAllOutsideRequestedRegions"
-    effect = "Deny"
+  name        = each.value.name
+  description = each.value.description
+  type        = "SERVICE_CONTROL_POLICY"
 
-    not_actions = [
-      "cloudfront:*",
-      "iam:*",
-      "organizations:*",
-      "route53:*",
-      "support:*"
-    ]
-
-    resources = ["*"]
-
-    condition {
-      test     = "StringNotEquals"
-      variable = "aws:RequestedRegion"
-      values   = [var.region]
-    }
-  }
-}
-
-resource "aws_organizations_policy" "deny_regions" {
-  name    = "deny-all-outside-requested-regions"
-  content = data.aws_iam_policy_document.deny_regions.json
+  content = data.aws_iam_policy_document.scps[each.key].json
 
   tags = local.default_tags
 }
 
-resource "aws_organizations_policy_attachment" "deny_regions" {
-  policy_id = aws_organizations_policy.deny_regions.id
+resource "aws_organizations_policy_attachment" "scps" {
+  for_each = local.scps
+
+  policy_id = aws_organizations_policy.scps[each.key].id
   target_id = data.aws_organizations_organization.org.roots[0].id
 }
